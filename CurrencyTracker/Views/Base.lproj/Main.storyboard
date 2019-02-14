@@ -13,7 +13,7 @@
         <!--Currencies-->
         <scene sceneID="zMu-zA-VSd">
             <objects>
-                <viewController id="z0g-ja-vks" sceneMemberID="viewController">
+                <viewController id="z0g-ja-vks" customClass="CurrenciesViewController" customModule="CurrencyTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZEs-K3-dW7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,6 +104,9 @@
                         <viewLayoutGuide key="safeArea" id="kUt-wz-Ecn"/>
                     </view>
                     <navigationItem key="navigationItem" title="Currencies" id="zcW-mX-Z5Z"/>
+                    <connections>
+                        <outlet property="tableView" destination="i5x-od-a80" id="Ki7-hD-0eY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7F2-w6-gbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

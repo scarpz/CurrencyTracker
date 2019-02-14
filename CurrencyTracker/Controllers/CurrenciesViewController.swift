@@ -42,15 +42,29 @@ class CurrenciesViewController: UIViewController {
             
             var currentCurrency = Currency(sourceName: source.description())
             
-            CurrencyServices.getCurrency(for: .dollar, from: source) { currency, error in
-                
-                if let dollarCurrency = currency {
-                    
-                }
-            }
+            self.currencies.append(currentCurrency)
             
-            CurrencyServices.getCurrency(for: .euro, from: source) { currency, error in
+            if let currentIndex = self.currencies.firstIndex(where: { $0.sourceName == currentCurrency.sourceName }) {
                 
+                CurrencyServices.getCurrency(for: .dollar, from: source) { currency, error in
+                    if let dollarCurrency = currency {
+                        self.currencies[currentIndex].dolar = dollarCurrency
+                        
+                        DispatchQueue.main.sync {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+                
+                CurrencyServices.getCurrency(for: .euro, from: source) { currency, error in
+                    if let euroCurrency = currency {
+                        self.currencies[currentIndex].euro = euroCurrency
+                        
+                        DispatchQueue.main.sync {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
             }
         }
         

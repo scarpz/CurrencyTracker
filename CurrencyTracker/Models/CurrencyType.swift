@@ -13,7 +13,7 @@ enum CurrencyType {
     case euro
     case real
     
-    func short() -> String {
+    var short: String {
         switch self {
         case .dollar: return "USD"
         case .euro: return "EUR"

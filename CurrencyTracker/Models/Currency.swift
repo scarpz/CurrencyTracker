@@ -10,8 +10,8 @@ import Foundation
 
 struct Currency {
     var sourceName: String
-    var dolarValue: Double?
-    var euroValue: Double?
+    var dolar: CurrencyDetail?
+    var euro: CurrencyDetail?
     
     init(sourceName: String) {
         self.sourceName = sourceName

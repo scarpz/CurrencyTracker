@@ -10,22 +10,25 @@ import Foundation
 
 class CurrencyServices {
     
-    static func getCurrency(for type: CurrencyType, from source: APISources, completion: @escaping (_ response: Currency?, _ error: Error?) -> Void) {
+    static func getCurrency(for type: CurrencyType, from source: APISources, completion: @escaping (_ response: CurrencyDetail?, _ error: Error?) -> Void) {
         
-        let real = CurrencyType.real.short()
+        let real = CurrencyType.real.short
         
         let stringURL: String
         
         switch source {
-        case .awesomeAPI: stringURL = "https://economia.awesomeapi.com.br/json/list/\(type.short())-\(real)"
-        case .exchangeRatesAPI: stringURL = "https://api.exchangeratesapi.io/latest?base=\(type.short())&symbols=\(real)"
+        case .awesomeAPI: stringURL = "https://economia.awesomeapi.com.br/json/list/\(type.short)-\(real)/1"
+        case .exchangeRatesAPI: stringURL = "https://api.exchangeratesapi.io/latest?base=\(type.short)&symbols=\(real)"
         }
         
         let url = URL(string: stringURL)!
         
         Request.request(url: url, method: .get, headers: nil, body: nil) { data, error in
             if let data = data {
-                
+                let currencyDetail = ParseManager.parseToCurrencyDetail(data: data, for: type, from: source)
+                completion(currencyDetail, nil)
+            } else {
+                completion(nil, error!)
             }
         }
         

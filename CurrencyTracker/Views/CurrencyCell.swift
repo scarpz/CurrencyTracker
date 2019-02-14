@@ -19,7 +19,7 @@ class CurrencyCell: UITableViewCell {
     // MARK: - Methods
     func setup(_ currency: Currency) {
         self.sourceName.text = currency.sourceName
-        self.dolarValue.text =  "R$ " + String(format: "%.3f", currency.dolarValue ?? 0)
-        self.euroValue.text = "R$ " + String(format: "%.3f", currency.euroValue ?? 0)
+        self.dolarValue.text =  "R$ " + String(format: "%.3f", currency.dolar?.value ?? 0)
+        self.euroValue.text = "R$ " + String(format: "%.3f", currency.euro?.value ?? 0)
     }
 }
