@@ -11,11 +11,13 @@ import Foundation
 enum APISources: String {
     case awesomeAPI
     case exchangeRatesAPI
+    case coinAPI
     
-    func description() -> String {
+    var description: String {
         switch self {
         case .awesomeAPI: return "Awesome API"
         case .exchangeRatesAPI: return "Exchange Rates API"
+        case .coinAPI: return "Coin API"
         }
     }
 }

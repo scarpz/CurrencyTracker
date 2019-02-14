@@ -15,7 +15,7 @@ class CurrenciesViewController: UIViewController {
     
     
     // MARK: - Properties
-    let sources: Set<APISources> = [.awesomeAPI, .exchangeRatesAPI]
+    let sources: Set<APISources> = [.awesomeAPI, .exchangeRatesAPI, .coinAPI]
     var currencies: [Currency] = []
     
 
@@ -40,7 +40,7 @@ class CurrenciesViewController: UIViewController {
         
         for source in self.sources {
             
-            var currentCurrency = Currency(sourceName: source.description())
+            let currentCurrency = Currency(sourceName: source.description)
             
             self.currencies.append(currentCurrency)
             
@@ -67,7 +67,6 @@ class CurrenciesViewController: UIViewController {
                 }
             }
         }
-        
     }
 }
 
@@ -83,5 +82,9 @@ extension CurrenciesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencyCell") as! CurrencyCell
         cell.setup(self.currencies[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }

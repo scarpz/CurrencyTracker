@@ -19,11 +19,18 @@ class CurrencyServices {
         switch source {
         case .awesomeAPI: stringURL = "https://economia.awesomeapi.com.br/json/list/\(type.short)-\(real)/1"
         case .exchangeRatesAPI: stringURL = "https://api.exchangeratesapi.io/latest?base=\(type.short)&symbols=\(real)"
+        case .coinAPI: stringURL = "https://rest.coinapi.io/v1/exchangerate/\(type.short)/\(real)"
         }
         
         let url = URL(string: stringURL)!
         
-        Request.request(url: url, method: .get, headers: nil, body: nil) { data, error in
+        var header: [String : String] = [:]
+        
+        if source == .coinAPI {
+            header["X-CoinAPI-Key"] = "126DBC89-FCE3-427F-84DA-4A38BC393D31"
+        }
+        
+        Request.request(url: url, method: .get, headers: header, body: nil) { data, error in
             if let data = data {
                 let currencyDetail = ParseManager.parseToCurrencyDetail(data: data, for: type, from: source)
                 completion(currencyDetail, nil)

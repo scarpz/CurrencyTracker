@@ -33,6 +33,14 @@ class ParseManager {
             let value = ratesJson["BRL"] as! Double
             
             return CurrencyDetail(type: type, value: value)
+            
+        case .coinAPI:
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
+            
+            let value = json["rate"] as! Double
+            
+            return CurrencyDetail(type: type, value: value)
         }
     }
     
